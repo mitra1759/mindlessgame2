@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.os.CountDownTimer;
 import android.app.Application;
+import android.media.MediaPlayer;
 
 public class MainActivity extends AppCompatActivity {
 //    private Button start;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Button start = findViewById(R.id.button2);
         final ImageView pendulum = findViewById(R.id.imageView1);
+        final MediaPlayer ding =MediaPlayer.create(this,R.raw.ding);
 //        start.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                System.out.println("dwhsgd");
@@ -52,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 //                pendulum.startAnimation(rotate1);
 
 
-
+                    ding.start();
                     pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(500).start();
                     new CountDownTimer(700, 700) {
 
