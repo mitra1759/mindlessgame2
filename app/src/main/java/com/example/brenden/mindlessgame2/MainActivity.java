@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.start();
         final Button start = findViewById(R.id.button2);
         final ImageView pendulum = findViewById(R.id.imageView1);
+        final ImageView clickView = findViewById(R.id.clickView);
         final TextView score = findViewById(R.id.textView);
         final MediaPlayer ding = MediaPlayer.create(this, R.raw.ding);
         final MediaPlayer music = MediaPlayer.create(this, R.raw.background);
@@ -52,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
         rotate1.setRepeatCount(0);
 
 
-        pendulum.setOnClickListener(new View.OnClickListener() {
+        clickView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (pendulum.getRotation() < 20 && pendulum.getRotation() > -20) {
                     ding.start();
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         });
         start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                start.setVisibility(View.INVISIBLE);
                 pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1500000 / speed).start();
                 new CountDownTimer(1800000 / speed, 600000 / speed) {
 
