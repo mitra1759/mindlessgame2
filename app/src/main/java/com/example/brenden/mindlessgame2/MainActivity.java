@@ -13,8 +13,11 @@ import android.app.Application;
 import android.media.MediaPlayer;
 
 public class MainActivity extends AppCompatActivity {
-//    private Button start;
+    //    private Button start;
 //    private ImageView pendulum;
+    private void moverPendulum(){
+
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         final Button start = findViewById(R.id.button2);
         final ImageView pendulum = findViewById(R.id.imageView1);
-        final MediaPlayer ding =MediaPlayer.create(this,R.raw.ding);
+        final MediaPlayer ding = MediaPlayer.create(this, R.raw.ding);
 //        start.setOnClickListener(new View.OnClickListener() {
 //            public void onClick(View v) {
 //                System.out.println("dwhsgd");
@@ -31,7 +34,13 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-
+        pendulum.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if(pendulum.getRotation()<20&&pendulum.getRotation()>-20){
+                    ding.start();
+                }
+            }
+        });
         start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
 //                Animation rotate = new RotateAnimation(60f, -60f,
@@ -54,28 +63,28 @@ public class MainActivity extends AppCompatActivity {
 //                pendulum.startAnimation(rotate1);
 
 
-                    ding.start();
-                    pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(500).start();
-                    new CountDownTimer(700, 700) {
 
-                        public void onTick(long millisUntilFinished) {
+                pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(500).start();
+                new CountDownTimer(700, 700) {
+
+                    public void onTick(long millisUntilFinished) {
 //                        mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        }
+                    }
 
-                        public void onFinish() {
-                            pendulum.animate().rotation(pendulum.getRotation() - 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(500).start();
-                        }
-                    }.start();
-                    new CountDownTimer(700, 700) {
+                    public void onFinish() {
+                        pendulum.animate().rotation(pendulum.getRotation() - 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(500).start();
+                    }
+                }.start();
+                new CountDownTimer(700, 700) {
 
-                        public void onTick(long millisUntilFinished) {
+                    public void onTick(long millisUntilFinished) {
 //                        mTextField.setText("seconds remaining: " + millisUntilFinished / 1000);
-                        }
+                    }
 
-                        public void onFinish() {
+                    public void onFinish() {
 
-                        }
-                    }.start();
+                    }
+                }.start();
 
 //
 //                pendulum.animate().rotation(pendulum.getRotation()+180).start();
