@@ -19,6 +19,9 @@ import android.media.MediaPlayer;
 public class MainActivity extends AppCompatActivity {
     int points = 0;
     int speed = 1000;
+    double multiplier=1;
+    int swing=2;
+    int previousSwing;
     private final static int MAX_VOLUME = 100;
     ConstraintLayout myLayout;
     AnimationDrawable animationDrawable;
@@ -37,6 +40,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView pendulum = findViewById(R.id.imageView1);
         final ImageView clickView = findViewById(R.id.clickView);
         final TextView score = findViewById(R.id.textView);
+        final TextView multiplierView = findViewById(R.id.multiplier);
         final MediaPlayer ding = MediaPlayer.create(this, R.raw.ding);
         final MediaPlayer music = MediaPlayer.create(this, R.raw.background);
         music.setLooping(true);
@@ -57,11 +61,18 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (pendulum.getRotation() < 20 && pendulum.getRotation() > -20) {
                     ding.start();
-                    points += 100;
-                    points *= 1.3;
+                    if(swing-1==previousSwing){
+                        multiplier+=1.25;
+                    }
+                    else {
+                        multiplier=1;
+                    }
+                    previousSwing=swing;
+                    points += 100*(speed/1000)*multiplier;
                     points /= 10;
                     points *= 10;
                     score.setText("Score:" + points);
+                    multiplierView.setText("x"+multiplier);
                     speed *= 1.03;
                 } else {
                     speed = 1000;
@@ -74,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 start.setVisibility(View.INVISIBLE);
                 pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1500000 / speed).start();
+                swing++;
                 new CountDownTimer(1800000 / speed, 600000 / speed) {
 
                     public void onTick(long millisUntilFinished) {
@@ -81,6 +93,7 @@ public class MainActivity extends AppCompatActivity {
 
                     public void onFinish() {
                         pendulum.animate().rotation(pendulum.getRotation() - 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1500000 / speed).start();
+                        swing++;
                         new CountDownTimer(1800000 / speed, 600000 / speed) {
 
                             public void onTick(long millisUntilFinished) {
