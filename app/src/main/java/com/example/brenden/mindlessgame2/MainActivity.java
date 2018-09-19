@@ -62,22 +62,25 @@ public class MainActivity extends AppCompatActivity {
                 if (pendulum.getRotation() < 20 && pendulum.getRotation() > -20) {
                     ding.start();
                     if(swing-1==previousSwing){
-                        multiplier+=1.25;
+                        multiplier+=.25;
+                        multiplierView.setText("x"+multiplier);
                     }
                     else {
                         multiplier=1;
                     }
                     previousSwing=swing;
-                    points += 100*(speed/1000)*multiplier;
+                    points += (100*speed/1000*multiplier);
                     points /= 10;
                     points *= 10;
                     score.setText("Score:" + points);
                     multiplierView.setText("x"+multiplier);
-                    speed *= 1.03;
+                    speed *= 1.05;
                 } else {
+                    multiplier=1;
                     speed = 1000;
                     points = 0;
                     score.setText("Score:" + points);
+                    multiplierView.setText("x"+multiplier);
                 }
             }
         });
@@ -86,6 +89,9 @@ public class MainActivity extends AppCompatActivity {
                 start.setVisibility(View.INVISIBLE);
                 pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1500000 / speed).start();
                 swing++;
+                if(swing-2>=previousSwing){
+                    multiplierView.setText("x1.0");
+                }
                 new CountDownTimer(1800000 / speed, 600000 / speed) {
 
                     public void onTick(long millisUntilFinished) {
@@ -94,6 +100,9 @@ public class MainActivity extends AppCompatActivity {
                     public void onFinish() {
                         pendulum.animate().rotation(pendulum.getRotation() - 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1500000 / speed).start();
                         swing++;
+                        if(swing-2>=previousSwing){
+                            multiplierView.setText("x1.0");
+                        }
                         new CountDownTimer(1800000 / speed, 600000 / speed) {
 
                             public void onTick(long millisUntilFinished) {
