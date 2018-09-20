@@ -38,8 +38,10 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.start();
         final Button start = findViewById(R.id.button2);
         final ImageView pendulum = findViewById(R.id.imageView1);
+        final ImageView endScreen = findViewById(R.id.endScreen);
         final ImageView clickView = findViewById(R.id.clickView);
         final TextView score = findViewById(R.id.textView);
+        final TextView gameOver = findViewById(R.id.gameOver);
         final TextView multiplierView = findViewById(R.id.multiplier);
         final MediaPlayer ding = MediaPlayer.create(this, R.raw.ding);
         final MediaPlayer music = MediaPlayer.create(this, R.raw.background);
@@ -76,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     multiplierView.setText("x"+multiplier);
                     speed *= 1.05;
                 } else {
+                    endScreen.setVisibility(View.VISIBLE);
+                    gameOver.setVisibility(View.VISIBLE);
+                    gameOver.setText("GAME OVER You finished with "+points+" points");
                     multiplier=1;
                     speed = 1000;
                     points = 0;
