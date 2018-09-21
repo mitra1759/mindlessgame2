@@ -37,7 +37,10 @@ public class MainActivity extends AppCompatActivity {
         animationDrawable.setExitFadeDuration(4500);
         animationDrawable.start();
         final Button start = findViewById(R.id.button2);
+        final Button restart = findViewById(R.id.restart);
         final ImageView pendulum = findViewById(R.id.imageView1);
+        final ImageView leftIndicator = findViewById(R.id.leftIndicator);
+        final ImageView rightIndicator = findViewById(R.id.rightIndicator);
         final ImageView endScreen = findViewById(R.id.endScreen);
         final ImageView clickView = findViewById(R.id.clickView);
         final TextView score = findViewById(R.id.textView);
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
         rotate1.setDuration(700);
         rotate1.setInterpolator(new AccelerateDecelerateInterpolator());
         rotate1.setRepeatCount(0);
+
+
 
 
         clickView.setOnClickListener(new View.OnClickListener() {
@@ -81,12 +86,28 @@ public class MainActivity extends AppCompatActivity {
                     endScreen.setVisibility(View.VISIBLE);
                     gameOver.setVisibility(View.VISIBLE);
                     gameOver.setText("GAME OVER You finished with "+points+" points");
+                    restart.setVisibility(View.VISIBLE);
                     multiplier=1;
                     speed = 1000;
                     points = 0;
                     score.setText("Score:" + points);
                     multiplierView.setText("x"+multiplier);
                 }
+
+            }
+        });
+
+        restart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                restart.setVisibility(View.INVISIBLE);
+                gameOver.setVisibility(View.INVISIBLE);
+                endScreen.setVisibility(View.INVISIBLE);
+                points=0;
+                speed=1000;
+                score.setText("Score:" + points);
+                multiplierView.setText("x"+multiplier);
+                multiplier=1;
             }
         });
         start.setOnClickListener(new View.OnClickListener() {
