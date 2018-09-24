@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     int swing=2;
     int previousSwing;
     int bonus=1;
+    boolean run =true;
     private final static int MAX_VOLUME = 100;
     ConstraintLayout myLayout;
     AnimationDrawable animationDrawable;
@@ -70,78 +71,80 @@ public class MainActivity extends AppCompatActivity {
 
         clickView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (pendulum.getRotation() < 20 && pendulum.getRotation() > -20) {
-                    bonus=1;
-                    leftIndicator1A.setVisibility(View.VISIBLE);
-                    rightIndicator1A.setVisibility(View.VISIBLE);
-                    new CountDownTimer(400, 400) {
-
-                        public void onTick(long millisUntilFinished) {
-                        }
-
-                        public void onFinish() {
-                            leftIndicator1A.setVisibility(View.INVISIBLE);
-                            rightIndicator1A.setVisibility(View.INVISIBLE);
-
-                        }
-                    }.start();
-                    if(pendulum.getRotation() < 10 && pendulum.getRotation() > -10){
-                        bonus=4;
-                        leftIndicator2A.setVisibility(View.VISIBLE);
-                        rightIndicator2A.setVisibility(View.VISIBLE);
+                if (run) {
+                    if (pendulum.getRotation() < 20 && pendulum.getRotation() > -20) {
+                        bonus = 1;
+                        leftIndicator1A.setVisibility(View.VISIBLE);
+                        rightIndicator1A.setVisibility(View.VISIBLE);
                         new CountDownTimer(400, 400) {
 
                             public void onTick(long millisUntilFinished) {
                             }
 
                             public void onFinish() {
-                                leftIndicator2A.setVisibility(View.INVISIBLE);
-                                rightIndicator2A.setVisibility(View.INVISIBLE);
+                                leftIndicator1A.setVisibility(View.INVISIBLE);
+                                rightIndicator1A.setVisibility(View.INVISIBLE);
 
                             }
                         }.start();
-                        if(pendulum.getRotation() < 3 && pendulum.getRotation() > -3){
-                            middleIndicatorA.setVisibility(View.VISIBLE);
+                        if (pendulum.getRotation() < 10 && pendulum.getRotation() > -10) {
+                            bonus = 4;
+                            leftIndicator2A.setVisibility(View.VISIBLE);
+                            rightIndicator2A.setVisibility(View.VISIBLE);
                             new CountDownTimer(400, 400) {
 
                                 public void onTick(long millisUntilFinished) {
                                 }
 
                                 public void onFinish() {
-                                    middleIndicatorA.setVisibility(View.INVISIBLE);
+                                    leftIndicator2A.setVisibility(View.INVISIBLE);
+                                    rightIndicator2A.setVisibility(View.INVISIBLE);
 
                                 }
                             }.start();
-                            bonus=10;
-                        }
-                    }
-                    ding.start();
-                    if(swing-1==previousSwing){
-                        multiplier+=.25;
-                        multiplierView.setText("x"+multiplier);
-                    }
-                    else {
-                        multiplier=1;
-                    }
-                    previousSwing=swing;
-                    points += (100*speed/1000*multiplier*bonus);
-                    points /= 10;
-                    points *= 10;
-                    score.setText("Score:" + points);
-                    multiplierView.setText("x"+multiplier);
-                    speed *= 1.05;
-                } else {
-                    endScreen.setVisibility(View.VISIBLE);
-                    gameOver.setVisibility(View.VISIBLE);
-                    gameOver.setText("GAME OVER You finished with "+points+" points");
-                    restart.setVisibility(View.VISIBLE);
-                    multiplier=1;
-                    speed = 1000;
-                    points = 0;
-                    score.setText("Score:" + points);
-                    multiplierView.setText("x"+multiplier);
-                }
+                            if (pendulum.getRotation() < 3 && pendulum.getRotation() > -3) {
+                                middleIndicatorA.setVisibility(View.VISIBLE);
+                                new CountDownTimer(400, 400) {
 
+                                    public void onTick(long millisUntilFinished) {
+                                    }
+
+                                    public void onFinish() {
+                                        middleIndicatorA.setVisibility(View.INVISIBLE);
+
+                                    }
+                                }.start();
+                                bonus = 10;
+                            }
+                        }
+                        ding.start();
+                        if (swing - 1 == previousSwing) {
+                            multiplier += .25;
+                            multiplierView.setText("x" + multiplier);
+                        } else {
+                            multiplier = 1;
+                        }
+                        previousSwing = swing;
+                        points += (100 * speed / 1000 * multiplier * bonus);
+                        points /= 10;
+                        points *= 10;
+                        score.setText("Score:" + points);
+                        multiplierView.setText("x" + multiplier);
+                        speed *= 1.05;
+                    } else {
+                        endScreen.setVisibility(View.VISIBLE);
+                        run=false;
+                        gameOver.setVisibility(View.VISIBLE);
+                        gameOver.setText("GAME OVER You finished with " + points + " points");
+                        restart.setVisibility(View.VISIBLE);
+                        multiplier = 1;
+                        speed = 1000;
+                        points = 0;
+                        score.setText("Score:" + points);
+                        multiplierView.setText("x" + multiplier);
+                    }
+
+                }
             }
         });
 
@@ -153,6 +156,7 @@ public class MainActivity extends AppCompatActivity {
                 endScreen.setVisibility(View.INVISIBLE);
                 points=0;
                 speed=1000;
+                run=true;
                 score.setText("Score:" + points);
                 multiplierView.setText("x"+multiplier);
                 multiplier=1;
