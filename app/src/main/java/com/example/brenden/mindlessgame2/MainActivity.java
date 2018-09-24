@@ -87,7 +87,31 @@ public class MainActivity extends AppCompatActivity {
                     }.start();
                     if(pendulum.getRotation() < 10 && pendulum.getRotation() > -10){
                         bonus=4;
+                        leftIndicator2A.setVisibility(View.VISIBLE);
+                        rightIndicator2A.setVisibility(View.VISIBLE);
+                        new CountDownTimer(400, 400) {
+
+                            public void onTick(long millisUntilFinished) {
+                            }
+
+                            public void onFinish() {
+                                leftIndicator2A.setVisibility(View.INVISIBLE);
+                                rightIndicator2A.setVisibility(View.INVISIBLE);
+
+                            }
+                        }.start();
                         if(pendulum.getRotation() < 3 && pendulum.getRotation() > -3){
+                            middleIndicatorA.setVisibility(View.VISIBLE);
+                            new CountDownTimer(400, 400) {
+
+                                public void onTick(long millisUntilFinished) {
+                                }
+
+                                public void onFinish() {
+                                    middleIndicatorA.setVisibility(View.INVISIBLE);
+
+                                }
+                            }.start();
                             bonus=10;
                         }
                     }

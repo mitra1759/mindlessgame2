@@ -40,7 +40,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="#ff0000" />
+        app:srcCompat="@android:color/holo_red_dark" />
 
     <ImageView
         android:id="@+id/rightIndicator2"
@@ -73,7 +73,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.997"
-        app:srcCompat="#ff0000" />
+        app:srcCompat="@android:color/holo_red_dark" />
 
     <ImageView
         android:id="@+id/leftIndicator1"
@@ -106,7 +106,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.996"
-        app:srcCompat="#ff0000" />
+        app:srcCompat="@android:color/holo_red_dark" />
 
     <ImageView
         android:id="@+id/leftIndicator2"
@@ -140,7 +140,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.997"
-        app:srcCompat="#ff0000" />
+        app:srcCompat="@android:color/holo_red_dark" />
 
     <ImageView
         android:id="@+id/middleIndicator"
@@ -173,7 +173,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.997"
-        app:srcCompat="#ff0000" />
+        app:srcCompat="@android:color/holo_red_dark" />
 
     <ImageView
         android:id="@+id/imageView1"
