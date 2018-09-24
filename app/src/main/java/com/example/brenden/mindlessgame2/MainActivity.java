@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     double multiplier=1;
     int swing=2;
     int previousSwing;
+    int bonus=1;
     private final static int MAX_VOLUME = 100;
     ConstraintLayout myLayout;
     AnimationDrawable animationDrawable;
@@ -39,8 +40,11 @@ public class MainActivity extends AppCompatActivity {
         final Button start = findViewById(R.id.button2);
         final Button restart = findViewById(R.id.restart);
         final ImageView pendulum = findViewById(R.id.imageView1);
-        final ImageView leftIndicator = findViewById(R.id.leftIndicator);
-        final ImageView rightIndicator = findViewById(R.id.rightIndicator);
+        final ImageView leftIndicator1A = findViewById(R.id.leftIndicator1A);
+        final ImageView rightIndicator1A = findViewById(R.id.rightIndicator1A);
+        final ImageView leftIndicator2A = findViewById(R.id.leftIndicator2A);
+        final ImageView rightIndicator2A = findViewById(R.id.rightIndicator2A);
+        final ImageView middleIndicatorA = findViewById(R.id.middleIndicatorA);
         final ImageView endScreen = findViewById(R.id.endScreen);
         final ImageView clickView = findViewById(R.id.clickView);
         final TextView score = findViewById(R.id.textView);
@@ -67,6 +71,26 @@ public class MainActivity extends AppCompatActivity {
         clickView.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (pendulum.getRotation() < 20 && pendulum.getRotation() > -20) {
+                    bonus=1;
+                    leftIndicator1A.setVisibility(View.VISIBLE);
+                    rightIndicator1A.setVisibility(View.VISIBLE);
+                    new CountDownTimer(400, 400) {
+
+                        public void onTick(long millisUntilFinished) {
+                        }
+
+                        public void onFinish() {
+                            leftIndicator1A.setVisibility(View.INVISIBLE);
+                            rightIndicator1A.setVisibility(View.INVISIBLE);
+
+                        }
+                    }.start();
+                    if(pendulum.getRotation() < 10 && pendulum.getRotation() > -10){
+                        bonus=4;
+                        if(pendulum.getRotation() < 3 && pendulum.getRotation() > -3){
+                            bonus=10;
+                        }
+                    }
                     ding.start();
                     if(swing-1==previousSwing){
                         multiplier+=.25;
@@ -76,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
                         multiplier=1;
                     }
                     previousSwing=swing;
-                    points += (100*speed/1000*multiplier);
+                    points += (100*speed/1000*multiplier*bonus);
                     points /= 10;
                     points *= 10;
                     score.setText("Score:" + points);
