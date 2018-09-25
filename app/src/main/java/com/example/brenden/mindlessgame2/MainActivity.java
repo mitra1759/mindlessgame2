@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
     int swing=2;
     int previousSwing;
     int bonus=1;
-    boolean run =true;
+    boolean run =false;
     private final static int MAX_VOLUME = 100;
     ConstraintLayout myLayout;
     AnimationDrawable animationDrawable;
@@ -164,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         });
         start.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                run=true;
                 start.setVisibility(View.INVISIBLE);
                 pendulum.animate().rotation(pendulum.getRotation() + 100).setInterpolator(new AccelerateDecelerateInterpolator()).setDuration(1500000 / speed).start();
                 swing++;
